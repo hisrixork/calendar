@@ -13,7 +13,7 @@ class Calendar
      */
     public function __construct()
     {
-        $this->naviHref = "/wcalendar";
+        $this->naviHref = config('app.url') . "/wcalendar";
     }
 
     /********************* PROPERTY ********************/
@@ -159,8 +159,10 @@ class Calendar
 
         session(['we' => Helpers::$days['we']]);
 
-        return ' <li data-cat="' . Helpers::getCat($tmp) . '" id="li-' . $this->currentDate . '" class="mcol-7 ' . Helpers::isActive($tmp) . '' . ($cellNumber % 7 === 1 ? ' start ' : ($cellNumber % 7 === 0 || $cellNumber % 7 === 6 ? ' end active we' : '')) .
-            ($cellContent == null ? ' mask ' : '') . '"><span class="data-cell d-flex justify-content-center align-items-center cursor-pointer"> ' . $cellContent . '</span></li> ';
+        $cat = $tmp !== null ? Helpers::isActive($tmp) : '';
+
+        return ' <li data-cat="' . $cat . '" id="li-' . $this->currentDate . '" class="mcol-7 ' . $cat . ($cellNumber % 7 === 1 ? ' start ' : ($cellNumber % 7 === 0 || $cellNumber % 7 === 6 ? ' end active we' : '')) .
+            ($cellContent == null ? ' mask ' : '') . '"><span class="data-cell d-flex justify-content-center align-items-center cursor-pointer">' . $cellContent . '</span></li> ';
     }
 
     /**

@@ -49,24 +49,25 @@ class Helpers
         if (in_array(Carbon::parse($date)->toDateString(), session()->get('out')))
             $color = 'out';
 
-        $half = $wc !== null && $wc->half === 1 ? 'half' : '';
+        $half = $wc !== null && (int)$wc->half === 1 ? ' half' : '';
 
-        return $wc !== null || Carbon::now()->toDateString() === Carbon::parse($date)->toDateString() || $color ? 'active ' . ("$color $half " ?? '') : '';
+        return $wc !== null || Carbon::now()->toDateString() === Carbon::parse($date)->toDateString() || $color ? ("$color$half" ?? '') . ' active' : '';
     }
 
-    public static function getCat($date = null)
+    /*public static function getCat($date = null)
     {
         $user = Auth::user();
         if ($date !== null &&
             ($wc = Wcalendar::where('id_user', '=', $user->id)
                 ->where('start', '=', Carbon::parse($date)->toDateString())
-                ->orWhere('stop', '=', Carbon::parse($date)->toDateString())->first()) !== null && ($type = Category::where('id', $wc->id_category)->first()) !== null)
+                ->orWhere('stop', '=', Carbon::parse($date)->toDateString())->first()) !== null &&
+            ($type = Category::where('id', $wc->id_category)->first()) !== null)
             $cat = $type->name;
         else
             $cat = null;
 
         return strtoupper($cat);
-    }
+    }*/
 
     public static function getCounter($category, $year, $user = null)
     {
@@ -76,15 +77,13 @@ class Helpers
             ->where('start', '>=', $year . "-01-01")
             ->where('stop', '<', $year + 1 . "-01-01")
             ->where('id_category', Category::where('name', strtoupper($category))->first()->id ?? -1)
-            ->count();
-        $half = DB::table('wcalendars')
-                ->where('id_user', $user->getAuthIdentifier())
-                ->where('half', true)
-                ->where('start', '>=', $year . "-01-01")
-                ->where('stop', '<', $year + 1 . "-01-01")
-                ->where('id_category', Category::where('name', strtoupper($category))->first()->id ?? -1)
-                ->count() / 2;
-        return $full - $half;
+            ->get();
+
+        $half = 0;
+
+        foreach ($full as $f)
+            $half += $f->half ? 1 : 0;
+        return count($full) - ($half / 2);
     }
 
     public static function getColorByCategory($category)

@@ -281,18 +281,24 @@
                 let that = $(this), id = (that.attr('id') || 'li-').split('li-')[1] || null,
                     modal = $('#pickDateModal'), cat = that.attr('data-cat')
 
-                axios.get('/category/' + (cat || -1)).then(r => {
-                    modal.find('select#category').val(r.data.id || -1)
-                    modal.find('input#start').val(id)
-                    modal.find('input#stop').val(id)
-                    modal.modal('show')
-                }, () => {
-                    modal.find('input#start').val(id)
-                    modal.find('input#stop').val(id)
-                    modal.modal('show')
-                })
+                if (cat !== -1)
+                    axios.get('/category/' + (cat || -1)).then(r => {
+                        modal.find('select#category').val(r.data.id || -1)
+                        showPickDateForm(id)
+                    }, () => {
+                        showPickDateForm(id)
+                    })
+                else {
+                    showPickDateForm(id)
+                }
 
             })
+
+            function showPickDateForm(id) {
+                modal.find('input#start').val(id)
+                modal.find('input#stop').val(id)
+                modal.modal('show')
+            }
         })
     </script>
 

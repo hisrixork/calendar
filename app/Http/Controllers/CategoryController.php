@@ -17,6 +17,6 @@ class CategoryController extends Controller
      */
     public function show($category)
     {
-        return Category::where('name', $category)->first();
+        return Category::where('name', explode(" ", $category)[0] ?? -1)->first();
     }
 }
