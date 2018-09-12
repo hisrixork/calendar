@@ -13,6 +13,10 @@
 
 Auth::routes();
 
+Route::get('/error/{error}', function ($error) {
+    return view('pages.error');
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::delete('wcalendar', 'WcalendarController@destroyAllInvalid')->name('wcalendar.destroy.invalid');
     Route::get('wcalendar/{month}/{year}', 'WcalendarController@goto')->name('wcalendar.goto');
