@@ -1,0 +1,453 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+select {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+.form-control:focus {
+    border-color: #ced4da;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+/*
+ *
+ * FORM LOAD
+ *
+ */
+
+#form-load {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, .5);
+    z-index: 1099;
+}
+
+#form-load .loader-container {
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    border: 2px solid rgba(0, 0, 0, .1);
+}
+
+#form-load .loader-container:after {
+    content: '';
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    border-top-color: #7EC5C2;
+    -webkit-animation: rotate 1s linear infinite;
+    -o-animation: rotate 1s linear infinite;
+    animation: rotate 1s linear infinite;
+}
+
+#form-load .loader-container .my-fa-loader {
+    -webkit-transition: color 1s;
+    -moz-transition: color 1s;
+    -ms-transition: color 1s;
+    -o-transition: color 1s;
+    transition: color 1s;
+    font-family: 'FontAwesome', sans-serif;
+    font-size: 3.2em;
+    -webkit-font-smoothing: antialiased;
+}
+
+.my-fa-loader:before {
+    content: '';
+    position: absolute;
+    top: 53%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 2px;
+    height: 3px;
+    font-size: 10px;
+    background: #ffffff;
+}
+
+.light {
+    -webkit-text-stroke: 4px white;
+}
+
+.expand-icon:after {
+    content: "\f023";
+}
+
+@keyframes rotate {
+    from {
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    width: 0;
+    border-radius: 100%;
+    background: #fff;
+    margin: auto;
+    opacity: 0;
+    z-index: -1;
+    -webkit-transition: height 1s, width 1s, border-radius .3s .6s, opacity 1s;
+    -moz-transition: height 1s, width 1s, border-radius .3s .6s, opacity 1s;
+    -ms-transition: height 1s, width 1s, border-radius .3s .6s, opacity 1s;
+    -o-transition: height 1s, width 1s, border-radius .3s .6s, opacity 1s;
+    transition: height 1s, width 1s, border-radius .3s .6s, opacity 1s;
+}
+
+.sidebar.in {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    opacity: 1;
+    background: #fff;
+    z-index: 1;
+}
+
+.sidebar-toggle,
+.export,
+.pick-date {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    height: 60px;
+    width: 60px;
+    z-index: 2;
+}
+
+.export {
+    right: 100px;
+}
+
+.pick-date {
+    right: 170px;
+}
+
+.content {
+}
+
+.row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+@media screen and (max-width: 575px) {
+
+    .sidebar {
+        position: fixed;
+        top: inherit;
+        right: 0;
+        height: 50px;
+        -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 -4px 15px 0 rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 -4px 15px 0 rgba(0, 0, 0, 0.15);
+        box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 -4px 15px 0 rgba(0, 0, 0, 0.15);
+    }
+}
+
+#legend .type span {
+    font-family: 'Raleway', sans-serif;
+}
+
+*:focus {
+    outline: none;
+}
+
+.ring-left, .ring-right {
+    position: absolute;
+    top: 75px;
+}
+
+.ring-left {
+    left: 2em;
+}
+
+.ring-right {
+    right: 2em;
+}
+
+.ring-left:before, .ring-left:after, .ring-right:before, .ring-right:after {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 3px 1px rgba(0, 0, 0, 0.3), 0 -1px 1px rgba(0, 0, 0, 0.2);
+    content: "";
+    display: inline-block;
+    margin: 8px;
+    height: 32px;
+    width: 8px;
+}
+
+#calendar .box .header {
+    position: absolute;
+    top: -100px;
+    right: 2em;
+}
+
+#calendar .box-content li.active:not(.mask).F span,
+#legend .type.F span {
+    background: #dc3545 !important;
+}
+
+#calendar .box-content li.active:not(.mask).CP span,
+#legend .type.CP span {
+    background: #28a745 !important;
+}
+
+#calendar .box-content li.active:not(.mask).AM span,
+#legend .type.AM span {
+    background: #00695c !important;
+}
+
+#calendar .box-content li.active:not(.mask).R span,
+#legend .type.R span {
+    background: #ffc107 !important;
+}
+
+#calendar .box-content li.active:not(.mask).A span,
+#legend .type.A span {
+    background: #aa66cc !important;
+}
+
+#calendar .box-content li.active:not(.mask).CS span,
+#legend .type.CS span {
+    background: #ef6c00 !important;
+}
+
+.calendar-header {
+    height: 100px;
+}
+
+.clock-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 3;
+}
+
+.clock,
+.event {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    box-sizing: border-box;
+    display: block;
+    margin: auto;
+    z-index: 1;
+}
+
+.event {
+    max-width: 50%;
+}
+
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none !important;
+}
+
+.clock .hour,
+.clock .hours,
+.clock .minutes,
+.clock .seconds,
+.clock .date,
+.clock .center,
+.clock .center-empty {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.clock .hours,
+.clock .minutes,
+.clock .seconds {
+    -webkit-transform-origin: bottom;
+    -moz-transform-origin: bottom;
+    -ms-transform-origin: bottom;
+    -o-transform-origin: bottom;
+    transform-origin: bottom;
+    -webkit-transition: all 1s;
+    -moz-transition: transform 1s;
+    -ms-transition: transform 1s;
+    -o-transition: transform 1s;
+    transition: transform 1s;
+}
+
+.hour {
+    margin: auto;
+    width: 1px;
+    height: 100%;
+    background-color: #A9A9A9;
+    z-index: 2;
+}
+
+.hour.hour-3, .hour.hour-6 {
+    width: 3px;
+}
+
+.hour.hour-1 {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+
+.hour.hour-2 {
+    -webkit-transform: rotate(60deg);
+    -moz-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    -o-transform: rotate(60deg);
+    transform: rotate(60deg);
+}
+
+.hour.hour-3 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.hour.hour-4 {
+    -webkit-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    -o-transform: rotate(120deg);
+    transform: rotate(120deg);
+}
+
+.hour.hour-5 {
+    -webkit-transform: rotate(150deg);
+    -moz-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    -o-transform: rotate(150deg);
+    transform: rotate(150deg);
+}
+
+.clock .hours {
+    bottom: 40px;
+    height: 40px;
+    width: 3px;
+    z-index: 4;
+}
+
+.clock .minutes {
+    bottom: 60px;
+    height: 60px;
+    width: 3px;
+    z-index: 4;
+}
+
+.clock .seconds {
+    bottom: 65px;
+    height: 65px;
+    width: 1px;
+    z-index: 4;
+}
+
+.clock .date {
+    height: 15px;
+    width: 20px;
+    right: 40px;
+    z-index: 3;
+}
+
+.clock .center-empty {
+    height: 125px;
+    width: 125px;
+    z-index: 3;
+}
+
+.clock .center {
+    height: 5px;
+    width: 5px;
+    z-index: 3;
+}
+
+.mcol-7 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    flex: 0 0 14.285714%;
+    max-width: 14.285714%;
+}
+
+#calendar li {
+    list-style-type: none;
+}
+
+#calendar .box-content li,
+#legend .type {
+    position: relative;
+    height: 75px;
+}
+
+#calendar .box-content li span,
+#legend .type span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    margin: auto;
+    height: 28px;
+    width: 28px;
+    padding: 4px;
+    border-radius: 100%;
+    font-weight: 700;
+    text-align: center;
+    box-sizing: content-box;
+}
+
+#calendar .box-content li.active:not(.mask) span {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+#calendar .box-content li.we:not(.mask) span {
+    background: #FF3B3F;
+    background-image: repeating-linear-gradient(-45deg, #fff 3px, #fff 6px, #FF3B3F 7px, #FF3B3F 14px);
+}
+
+#calendar .box-content li.out:not(.mask) span {
+    background: #ff0;
+    background-image: repeating-linear-gradient(-45deg, #fff 3px, #fff 6px, #ff0 7px, #ff0 14px)
+}
+
+#calendar .box-content li.half:not(.mask) span {
+    border: 2px dotted #000;
+}
