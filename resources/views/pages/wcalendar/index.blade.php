@@ -12,14 +12,14 @@
                         @if(($navi = $data['navi']) !== null)
                             <div class="row w-100 mx-auto">
                                 <div class="col-3 text-left">
-                                    <a href="{{ $navi['prev'] }}" class="text-white"><i
+                                    <a href="{{ $navi['prev'] }}" class="prev text-white"><i
                                                 class="fa fa-chevron-left fa-2x"></i></a>
                                 </div>
                                 <div class="col-6 text-center text-uppercase">
                                     {{ $navi['date'] }}
                                 </div>
                                 <div class="col-3 text-right">
-                                    <a href="{{ $navi['next'] }}" class="text-white"><i
+                                    <a href="{{ $navi['next'] }}" class="next text-white"><i
                                                 class="fa fa-chevron-right fa-2x"></i></a>
                                 </div>
                             </div>
@@ -183,17 +183,27 @@
 
                 let that = $(this), id = (that.attr('id') || 'li-').split('li-')[1] || null,
                     modal = $('#addCalendarModal'), cat = that.attr('data-cat')
+                $('#form-load').toggleClass('d-flex d-none')
+                if (cat)
+                    axios.get('{{ config('app.url') }}/category/' + (cat || -1)).then(r => {
+                        modal.find('select#category').val(r.data.id || -1)
+                        modal.find('input#start').val(id)
+                        modal.find('input#stop').val(id)
+                        modal.modal('show')
+                        $('#form-load').toggleClass('d-flex d-none')
+                    }, () => {
+                        modal.find('input#start').val(id)
+                        modal.find('input#stop').val(id)
+                        modal.modal('show')
+                        $('#form-load').toggleClass('d-flex d-none')
+                    })
+                else {
+                    modal.find('input#start').val(id)
+                    modal.find('input#stop').val(id)
+                    modal.modal('show')
+                    $('#form-load').toggleClass('d-flex d-none')
+                }
 
-                axios.get('/category/' + (cat || -1)).then(r => {
-                    modal.find('select#category').val(r.data.id || -1)
-                    modal.find('input#start').val(id)
-                    modal.find('input#stop').val(id)
-                    modal.modal('show')
-                }, () => {
-                    modal.find('input#start').val(id)
-                    modal.find('input#stop').val(id)
-                    modal.modal('show')
-                })
 
             })
 
@@ -212,6 +222,15 @@
         })
 
         $(function () {
+
+            $('a.prev, a.next').click(function (e) {
+
+                // e.preventDefault()
+                $('#form-load').toggleClass('d-flex d-none')
+
+                // $(this).trigger('click');
+            })
+
             $('#addCalendarBtn').click(function (e) {
 
                 $("#form-load").toggleClass("d-flex d-none")
@@ -277,24 +296,12 @@
             })
 
             $('.pick-date').click(function () {
-
-                let that = $(this), id = (that.attr('id') || 'li-').split('li-')[1] || null,
-                    modal = $('#pickDateModal'), cat = that.attr('data-cat')
-
-                if (cat !== -1)
-                    axios.get('/category/' + (cat || -1)).then(r => {
-                        modal.find('select#category').val(r.data.id || -1)
-                        showPickDateForm(id)
-                    }, () => {
-                        showPickDateForm(id)
-                    })
-                else {
-                    showPickDateForm(id)
-                }
-
+                let that = $(this), id = (that.attr('id') || 'li-').split('li-')[1] || null
+                showPickDateForm(id)
             })
 
             function showPickDateForm(id) {
+                let modal = $('#pickDateModal')
                 modal.find('input#start').val(id)
                 modal.find('input#stop').val(id)
                 modal.modal('show')
